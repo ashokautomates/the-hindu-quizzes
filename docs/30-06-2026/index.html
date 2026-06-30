@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECP | The Hindu 30.06.2026 - Editorial Vocab Quiz</title>
+<style>
+  :root {
+    --navy:#1F3864;
+    --navy-light:#2E4D86;
+    --saffron:#FF9933;
+    --green:#138808;
+    --bg:#eef1f6;
+    --card:#ffffff;
+    --ink:#1c2433;
+    --muted:#5b6675;
+    --line:#dce2ec;
+    --correct-bg:#e7f6ea;
+    --correct-bd:#138808;
+    --wrong-bg:#fdeceb;
+    --wrong-bd:#d64541;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body {
+    font-family:"Calibri","Segoe UI",system-ui,-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.5;
+    padding-bottom:48px;
+  }
+  .brand {
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);
+    color:#fff;
+    padding:22px 18px 16px;
+    text-align:center;
+  }
+  .brand h1 {
+    font-size:clamp(1.45rem,4vw,2.2rem);
+    letter-spacing:0;
+    margin-bottom:6px;
+  }
+  .brand p {
+    color:#e8edf7;
+    font-size:1rem;
+  }
+  .tricolor { height:5px; display:flex; }
+  .tricolor span { flex:1; }
+  .tricolor span:nth-child(1) { background:var(--saffron); }
+  .tricolor span:nth-child(2) { background:#fff; }
+  .tricolor span:nth-child(3) { background:var(--green); }
+  main {
+    width:min(920px,calc(100% - 24px));
+    margin:18px auto 0;
+  }
+  .score-panel {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:14px;
+    display:flex;
+    gap:12px;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:5;
+    box-shadow:0 8px 20px rgba(31,56,100,.08);
+  }
+  .score-text {
+    color:var(--muted);
+    font-weight:700;
+  }
+  .score-text strong { color:var(--navy); font-size:1.2rem; }
+  .actions { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+  .actions button {
+    border:1px solid var(--navy);
+    background:#fff;
+    color:var(--navy);
+    border-radius:6px;
+    padding:8px 12px;
+    font-weight:700;
+    cursor:pointer;
+  }
+  .actions button.primary { background:var(--navy); color:#fff; }
+  .question-card {
+    margin-top:14px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:16px;
+    box-shadow:0 5px 16px rgba(31,56,100,.06);
+  }
+  .q-meta {
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    color:var(--muted);
+    font-size:.78rem;
+    font-weight:800;
+    margin-bottom:8px;
+  }
+  .question-card h2 {
+    font-size:1.06rem;
+    color:var(--navy);
+    margin-bottom:12px;
+  }
+  .options {
+    display:grid;
+    gap:8px;
+  }
+  .option {
+    width:100%;
+    border:1px solid var(--line);
+    background:#fff;
+    color:var(--ink);
+    border-radius:6px;
+    padding:10px 12px;
+    text-align:left;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    cursor:pointer;
+    font:inherit;
+    font-weight:700;
+  }
+  .option:disabled { cursor:default; opacity:1; }
+  .letter {
+    flex:0 0 auto;
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    background:#f1f4f9;
+    color:var(--navy);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:.82rem;
+  }
+  .option.correct {
+    background:var(--correct-bg);
+    border-color:var(--correct-bd);
+  }
+  .option.wrong {
+    background:var(--wrong-bg);
+    border-color:var(--wrong-bd);
+  }
+  .feedback {
+    margin-top:10px;
+    padding:10px 12px;
+    border-radius:6px;
+    border:1px solid var(--line);
+    background:#f7f9fc;
+  }
+  .feedback.ok { border-color:var(--correct-bd); background:var(--correct-bg); }
+  .feedback.bad { border-color:var(--wrong-bd); background:var(--wrong-bg); }
+  .feedback-title { display:block; margin-bottom:2px; }
+  footer {
+    width:min(920px,calc(100% - 24px));
+    margin:20px auto 0;
+    color:var(--muted);
+    font-size:.9rem;
+    text-align:center;
+  }
+  @media (max-width:640px) {
+    .score-panel { align-items:flex-start; flex-direction:column; position:static; }
+    .actions { justify-content:flex-start; }
+    .brand { padding-top:18px; }
+  }
+</style>
+</head>
+<body>
+  <div class="tricolor"><span></span><span></span><span></span></div>
+  <header class="brand">
+    <h1>The Hindu Editorial Vocab Quiz</h1>
+    <p>30.06.2026 - Caught in the middle</p>
+  </header>
+  <main>
+    <section class="score-panel" aria-live="polite">
+      <div class="score-text">
+        Score: <strong id="score">0</strong> / <span id="answered">0</span>
+        <span>answered</span> | <span>16 questions</span>
+      </div>
+      <div class="actions">
+        <button type="button" onclick="resetQuiz()">Reset</button>
+        <button type="button" class="primary" onclick="revealAll()">Show Answers</button>
+      </div>
+    </section>
+    
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 01</span>
+        <span>1 / 16</span>
+      </div>
+      <h2>Synonym of: Prioritise</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Give precedence to</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Neglect</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Assess needs</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Categorise items</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Give precedence to. Prioritise means to treat something as more important.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 02</span>
+        <span>2 / 16</span>
+      </div>
+      <h2>Synonym of: Abuse</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Mistreatment</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Protection</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Offence</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Complaint</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Mistreatment. Abuse means harmful treatment or misuse.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 03</span>
+        <span>3 / 16</span>
+      </div>
+      <h2>Synonym of: Illicit</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Unlawful</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Legal</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Hidden</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Unofficial</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Unlawful. Illicit means illegal or not permitted by law.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 04</span>
+        <span>4 / 16</span>
+      </div>
+      <h2>Synonym of: Maritime</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Marine</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Inland</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Canal-based</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Railway-based</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Marine. Maritime means connected with the sea or shipping.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 05</span>
+        <span>5 / 16</span>
+      </div>
+      <h2>Synonym of: Surge</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Spike</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Decline</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Delay</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Pause</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Spike. Surge means a sudden strong rise or increase.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 06</span>
+        <span>6 / 16</span>
+      </div>
+      <h2>Synonym of: Detoxification</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Purification</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Poisoning</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Diagnosis</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Observation</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Purification. Detoxification removes harmful substances from the body.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 07</span>
+        <span>7 / 16</span>
+      </div>
+      <h2>Synonym of: Density</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Concentration</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Sparseness</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Measurement</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Volume</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Concentration. Density refers to closeness or amount in an area.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 08</span>
+        <span>8 / 16</span>
+      </div>
+      <h2>Antonym of: Relapse</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Recurrence</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Recovery</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Monitoring</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Therapy</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Recovery. Relapse means returning to a previous illness or habit.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 09</span>
+        <span>9 / 16</span>
+      </div>
+      <h2>Antonym of: Ostracisation</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Exclusion</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Inclusion</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Criticism</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Suspicion</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Inclusion. Ostracisation means exclusion or social shunning.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 10</span>
+        <span>10 / 16</span>
+      </div>
+      <h2>Antonym of: Sensitise</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Educate</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Desensitise</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Consult</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Survey</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Desensitise. Sensitise means to make someone aware or responsive.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 11</span>
+        <span>11 / 16</span>
+      </div>
+      <h2>Antonym of: Scarce</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Limited</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Abundant</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Expensive</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Seasonal</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Abundant. Scarce means available only in small amounts.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 12</span>
+        <span>12 / 16</span>
+      </div>
+      <h2>Antonym of: Concentrated</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Clustered</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Scattered</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Structured</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Regulated</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Scattered. Concentrated means gathered closely in one place.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 13</span>
+        <span>13 / 16</span>
+      </div>
+      <h2>Antonym of: Stigma</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Shame</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Esteem</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Rumour</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Label</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Esteem. Stigma is a mark of shame or negative perception.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 14</span>
+        <span>14 / 16</span>
+      </div>
+      <h2>Antonym of: Disrupted</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Interrupted</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Continued</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Unstable</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Temporary</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Continued. Disrupted means interrupted or disturbed.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 15</span>
+        <span>15 / 16</span>
+      </div>
+      <h2>Phrasal Verb: Account For</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Explain or give a reason for something</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Hide the cause of an event</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Ignore a recorded total</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Deliver an item by sea</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: It means to explain, constitute, or be responsible for something.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 16</span>
+        <span>16 / 16</span>
+      </div>
+      <h2>Idiom: Slap On The Wrist</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>A very mild punishment for an offence</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>A severe long-term sentence</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>A sudden public protest</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>A written apology after damage</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: It means a very mild punishment for an offence.</p>
+      </div>
+    </article>
+
+  </main>
+  <footer>
+    <p>14 vocabulary questions + 2 idiom/phrasal-verb questions</p>
+    <p>https://ashokautomates.github.io/the-hindu-quizzes/30-06-2026/</p>
+  </footer>
+<script>
+  let score = 0;
+  let answered = 0;
+
+  function updateScore() {
+    document.getElementById("score").textContent = score;
+    document.getElementById("answered").textContent = answered;
+  }
+
+  function markCard(card, selectedIndex, countScore) {
+    if (card.dataset.done === "1") return;
+    const answer = Number(card.dataset.answer);
+    const options = Array.from(card.querySelectorAll(".option"));
+    const feedback = card.querySelector(".feedback");
+    const feedbackTitle = card.querySelector(".feedback-title");
+    const isCorrect = selectedIndex === answer;
+
+    options.forEach((option, index) => {
+      option.disabled = true;
+      if (index === answer) option.classList.add("correct");
+      if (index === selectedIndex && index !== answer) option.classList.add("wrong");
+    });
+
+    feedback.hidden = false;
+    feedback.classList.add(isCorrect ? "ok" : "bad");
+    feedbackTitle.textContent = isCorrect ? "Correct" : "Wrong";
+    card.dataset.done = "1";
+
+    if (countScore) {
+      answered += 1;
+      if (isCorrect) score += 1;
+      updateScore();
+    }
+  }
+
+  document.querySelectorAll(".option").forEach((button) => {
+    button.addEventListener("click", () => {
+      const card = button.closest(".question-card");
+      markCard(card, Number(button.dataset.index), true);
+    });
+  });
+
+  function revealAll() {
+    document.querySelectorAll(".question-card").forEach((card) => {
+      const answer = Number(card.dataset.answer);
+      markCard(card, answer, card.dataset.done !== "1");
+    });
+  }
+
+  function resetQuiz() {
+    score = 0;
+    answered = 0;
+    document.querySelectorAll(".question-card").forEach((card) => {
+      card.dataset.done = "0";
+      card.querySelectorAll(".option").forEach((option) => {
+        option.disabled = false;
+        option.classList.remove("correct", "wrong");
+      });
+      const feedback = card.querySelector(".feedback");
+      feedback.hidden = true;
+      feedback.classList.remove("ok", "bad");
+      card.querySelector(".feedback-title").textContent = "";
+    });
+    updateScore();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+</script>
+</body>
+</html>
