@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECP | The Hindu 01.07.2026 - Editorial Vocab Quiz</title>
+<style>
+  :root {
+    --navy:#1F3864;
+    --navy-light:#2E4D86;
+    --saffron:#FF9933;
+    --green:#138808;
+    --bg:#eef1f6;
+    --card:#ffffff;
+    --ink:#1c2433;
+    --muted:#5b6675;
+    --line:#dce2ec;
+    --correct-bg:#e7f6ea;
+    --correct-bd:#138808;
+    --wrong-bg:#fdeceb;
+    --wrong-bd:#d64541;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body {
+    font-family:"Calibri","Segoe UI",system-ui,-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.5;
+    padding-bottom:48px;
+  }
+  .brand {
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);
+    color:#fff;
+    padding:22px 18px 16px;
+    text-align:center;
+  }
+  .brand h1 {
+    font-size:clamp(1.45rem,4vw,2.2rem);
+    letter-spacing:0;
+    margin-bottom:6px;
+  }
+  .brand p {
+    color:#e8edf7;
+    font-size:1rem;
+  }
+  .tricolor { height:5px; display:flex; }
+  .tricolor span { flex:1; }
+  .tricolor span:nth-child(1) { background:var(--saffron); }
+  .tricolor span:nth-child(2) { background:#fff; }
+  .tricolor span:nth-child(3) { background:var(--green); }
+  main {
+    width:min(920px,calc(100% - 24px));
+    margin:18px auto 0;
+  }
+  .score-panel {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:14px;
+    display:flex;
+    gap:12px;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:5;
+    box-shadow:0 8px 20px rgba(31,56,100,.08);
+  }
+  .score-text {
+    color:var(--muted);
+    font-weight:700;
+  }
+  .score-text strong { color:var(--navy); font-size:1.2rem; }
+  .actions { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+  .actions button {
+    border:1px solid var(--navy);
+    background:#fff;
+    color:var(--navy);
+    border-radius:6px;
+    padding:8px 12px;
+    font-weight:700;
+    cursor:pointer;
+  }
+  .actions button.primary { background:var(--navy); color:#fff; }
+  .question-card {
+    margin-top:14px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:16px;
+    box-shadow:0 5px 16px rgba(31,56,100,.06);
+  }
+  .q-meta {
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    color:var(--muted);
+    font-size:.78rem;
+    font-weight:800;
+    margin-bottom:8px;
+  }
+  .question-card h2 {
+    font-size:1.06rem;
+    color:var(--navy);
+    margin-bottom:12px;
+  }
+  .options {
+    display:grid;
+    gap:8px;
+  }
+  .option {
+    width:100%;
+    border:1px solid var(--line);
+    background:#fff;
+    color:var(--ink);
+    border-radius:6px;
+    padding:10px 12px;
+    text-align:left;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    cursor:pointer;
+    font:inherit;
+    font-weight:700;
+  }
+  .option:disabled { cursor:default; opacity:1; }
+  .letter {
+    flex:0 0 auto;
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    background:#f1f4f9;
+    color:var(--navy);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:.82rem;
+  }
+  .option.correct {
+    background:var(--correct-bg);
+    border-color:var(--correct-bd);
+  }
+  .option.wrong {
+    background:var(--wrong-bg);
+    border-color:var(--wrong-bd);
+  }
+  .feedback {
+    margin-top:10px;
+    padding:10px 12px;
+    border-radius:6px;
+    border:1px solid var(--line);
+    background:#f7f9fc;
+  }
+  .feedback.ok { border-color:var(--correct-bd); background:var(--correct-bg); }
+  .feedback.bad { border-color:var(--wrong-bd); background:var(--wrong-bg); }
+  .feedback-title { display:block; margin-bottom:2px; }
+  footer {
+    width:min(920px,calc(100% - 24px));
+    margin:20px auto 0;
+    color:var(--muted);
+    font-size:.9rem;
+    text-align:center;
+  }
+  @media (max-width:640px) {
+    .score-panel { align-items:flex-start; flex-direction:column; position:static; }
+    .actions { justify-content:flex-start; }
+    .brand { padding-top:18px; }
+  }
+</style>
+</head>
+<body>
+  <div class="tricolor"><span></span><span></span><span></span></div>
+  <header class="brand">
+    <h1>The Hindu Editorial Vocab Quiz</h1>
+    <p>01.07.2026 - Delayed honour</p>
+  </header>
+  <main>
+    <section class="score-panel" aria-live="polite">
+      <div class="score-text">
+        Score: <strong id="score">0</strong> / <span id="answered">0</span>
+        <span>answered</span> | <span>16 questions</span>
+      </div>
+      <div class="actions">
+        <button type="button" onclick="resetQuiz()">Reset</button>
+        <button type="button" class="primary" onclick="revealAll()">Show Answers</button>
+      </div>
+    </section>
+    
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 01</span>
+        <span>1 / 16</span>
+      </div>
+      <h2>Synonym of: Secretive</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Concealed</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Open</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Diplomatic</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Cautious</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Concealed. Secretive means inclined to keep matters hidden.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 02</span>
+        <span>2 / 16</span>
+      </div>
+      <h2>Synonym of: Deception</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Misleading</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Honesty</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Rumour</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Confusion</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Misleading. Deception means hiding or distorting the truth.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 03</span>
+        <span>3 / 16</span>
+      </div>
+      <h2>Synonym of: Acknowledging</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Recognising</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Denying</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Recording</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Summarising</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Recognising. Acknowledging means accepting or recognising something.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 04</span>
+        <span>4 / 16</span>
+      </div>
+      <h2>Synonym of: Retaliation</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Reprisal</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Forgiveness</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Mobilisation</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Warning</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Reprisal. Retaliation is action taken in return for an attack.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 05</span>
+        <span>5 / 16</span>
+      </div>
+      <h2>Synonym of: Reluctant</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Hesitant</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Eager</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Careful</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Neutral</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Hesitant. Reluctant means unwilling or hesitant.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 06</span>
+        <span>6 / 16</span>
+      </div>
+      <h2>Synonym of: Hyperbolic</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Exaggerated</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Moderate</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Emotional</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Persuasive</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Exaggerated. Hyperbolic means overstated beyond what is reasonable.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 07</span>
+        <span>7 / 16</span>
+      </div>
+      <h2>Synonym of: Contemporaneously</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Simultaneously</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Later</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Publicly</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Briefly</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Simultaneously. Contemporaneously means at the same time.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 08</span>
+        <span>8 / 16</span>
+      </div>
+      <h2>Antonym of: Casualties</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Victims</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Survivors</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Witnesses</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Commanders</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Survivors. Casualties are people killed or injured.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 09</span>
+        <span>9 / 16</span>
+      </div>
+      <h2>Antonym of: Transparent</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Clear</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Opaque</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Formal</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Temporary</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Opaque. Transparent means open and clear.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 10</span>
+        <span>10 / 16</span>
+      </div>
+      <h2>Antonym of: Undermined</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Damaged</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Strengthened</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Reviewed</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Questioned</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Strengthened. Undermined means weakened or damaged.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 11</span>
+        <span>11 / 16</span>
+      </div>
+      <h2>Antonym of: Credibility</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Reliability</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Distrust</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Reputation</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Popularity</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Distrust. Credibility is the quality of being believed.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 12</span>
+        <span>12 / 16</span>
+      </div>
+      <h2>Antonym of: Disservice</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Harm</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Benefit</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Delay</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Debate</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Benefit. A disservice is an action that harms.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 13</span>
+        <span>13 / 16</span>
+      </div>
+      <h2>Antonym of: Disclosed</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Published</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Withheld</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Explained</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Stored</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Withheld. Disclosed means revealed or made known.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 14</span>
+        <span>14 / 16</span>
+      </div>
+      <h2>Antonym of: Accountability</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Responsibility</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Impunity</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Procedure</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Authority</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Impunity. Accountability means being answerable for actions.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 15</span>
+        <span>15 / 16</span>
+      </div>
+      <h2>Idiom: Pay With One&#x27;s Life</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Die while performing a duty or sacrifice</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Receive an award after service</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Avoid all risk in conflict</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Return home without injury</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: It means to die because of duty, danger, or sacrifice.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 16</span>
+        <span>16 / 16</span>
+      </div>
+      <h2>Phrasal Verb: Shot Down</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Bring down an aircraft by firing at it</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Approve a military proposal</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Hide details from public view</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Move troops across a border</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Correct: Shot down means brought down by firing at it.</p>
+      </div>
+    </article>
+
+  </main>
+  <footer>
+    <p>14 vocabulary questions + 2 idiom/phrasal-verb questions</p>
+    <p>https://ashokautomates.github.io/the-hindu-quizzes/01-07-2026/</p>
+  </footer>
+<script>
+  let score = 0;
+  let answered = 0;
+
+  function updateScore() {
+    document.getElementById("score").textContent = score;
+    document.getElementById("answered").textContent = answered;
+  }
+
+  function markCard(card, selectedIndex, countScore) {
+    if (card.dataset.done === "1") return;
+    const answer = Number(card.dataset.answer);
+    const options = Array.from(card.querySelectorAll(".option"));
+    const feedback = card.querySelector(".feedback");
+    const feedbackTitle = card.querySelector(".feedback-title");
+    const isCorrect = selectedIndex === answer;
+
+    options.forEach((option, index) => {
+      option.disabled = true;
+      if (index === answer) option.classList.add("correct");
+      if (index === selectedIndex && index !== answer) option.classList.add("wrong");
+    });
+
+    feedback.hidden = false;
+    feedback.classList.add(isCorrect ? "ok" : "bad");
+    feedbackTitle.textContent = isCorrect ? "Correct" : "Wrong";
+    card.dataset.done = "1";
+
+    if (countScore) {
+      answered += 1;
+      if (isCorrect) score += 1;
+      updateScore();
+    }
+  }
+
+  document.querySelectorAll(".option").forEach((button) => {
+    button.addEventListener("click", () => {
+      const card = button.closest(".question-card");
+      markCard(card, Number(button.dataset.index), true);
+    });
+  });
+
+  function revealAll() {
+    document.querySelectorAll(".question-card").forEach((card) => {
+      const answer = Number(card.dataset.answer);
+      markCard(card, answer, card.dataset.done !== "1");
+    });
+  }
+
+  function resetQuiz() {
+    score = 0;
+    answered = 0;
+    document.querySelectorAll(".question-card").forEach((card) => {
+      card.dataset.done = "0";
+      card.querySelectorAll(".option").forEach((option) => {
+        option.disabled = false;
+        option.classList.remove("correct", "wrong");
+      });
+      const feedback = card.querySelector(".feedback");
+      feedback.hidden = true;
+      feedback.classList.remove("ok", "bad");
+      card.querySelector(".feedback-title").textContent = "";
+    });
+    updateScore();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+</script>
+</body>
+</html>
