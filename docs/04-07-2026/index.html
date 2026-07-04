@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECP | The Hindu 04.07.2026 - Editorial Vocab Quiz</title>
+<style>
+  :root {
+    --navy:#1F3864;
+    --navy-light:#2E4D86;
+    --saffron:#FF9933;
+    --green:#138808;
+    --bg:#eef1f6;
+    --card:#ffffff;
+    --ink:#1c2433;
+    --muted:#5b6675;
+    --line:#dce2ec;
+    --correct-bg:#e7f6ea;
+    --correct-bd:#138808;
+    --wrong-bg:#fdeceb;
+    --wrong-bd:#d64541;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body {
+    font-family:"Calibri","Segoe UI",system-ui,-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.5;
+    padding-bottom:48px;
+  }
+  .brand {
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);
+    color:#fff;
+    padding:22px 18px 16px;
+    text-align:center;
+  }
+  .brand h1 {
+    font-size:clamp(1.45rem,4vw,2.2rem);
+    letter-spacing:0;
+    margin-bottom:6px;
+  }
+  .brand p {
+    color:#e8edf7;
+    font-size:1rem;
+  }
+  .tricolor { height:5px; display:flex; }
+  .tricolor span { flex:1; }
+  .tricolor span:nth-child(1) { background:var(--saffron); }
+  .tricolor span:nth-child(2) { background:#fff; }
+  .tricolor span:nth-child(3) { background:var(--green); }
+  main {
+    width:min(920px,calc(100% - 24px));
+    margin:18px auto 0;
+  }
+  .score-panel {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:14px;
+    display:flex;
+    gap:12px;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:5;
+    box-shadow:0 8px 20px rgba(31,56,100,.08);
+  }
+  .score-text {
+    color:var(--muted);
+    font-weight:700;
+  }
+  .score-text strong { color:var(--navy); font-size:1.2rem; }
+  .actions { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+  .actions button {
+    border:1px solid var(--navy);
+    background:#fff;
+    color:var(--navy);
+    border-radius:6px;
+    padding:8px 12px;
+    font-weight:700;
+    cursor:pointer;
+  }
+  .actions button.primary { background:var(--navy); color:#fff; }
+  .question-card {
+    margin-top:14px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:16px;
+    box-shadow:0 5px 16px rgba(31,56,100,.06);
+  }
+  .q-meta {
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    color:var(--muted);
+    font-size:.78rem;
+    font-weight:800;
+    margin-bottom:8px;
+  }
+  .question-card h2 {
+    font-size:1.06rem;
+    color:var(--navy);
+    margin-bottom:12px;
+  }
+  .options {
+    display:grid;
+    gap:8px;
+  }
+  .option {
+    width:100%;
+    border:1px solid var(--line);
+    background:#fff;
+    color:var(--ink);
+    border-radius:6px;
+    padding:10px 12px;
+    text-align:left;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    cursor:pointer;
+    font:inherit;
+    font-weight:700;
+  }
+  .option:disabled { cursor:default; opacity:1; }
+  .letter {
+    flex:0 0 auto;
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    background:#f1f4f9;
+    color:var(--navy);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:.82rem;
+  }
+  .option.correct {
+    background:var(--correct-bg);
+    border-color:var(--correct-bd);
+  }
+  .option.wrong {
+    background:var(--wrong-bg);
+    border-color:var(--wrong-bd);
+  }
+  .feedback {
+    margin-top:10px;
+    padding:10px 12px;
+    border-radius:6px;
+    border:1px solid var(--line);
+    background:#f7f9fc;
+  }
+  .feedback.ok { border-color:var(--correct-bd); background:var(--correct-bg); }
+  .feedback.bad { border-color:var(--wrong-bd); background:var(--wrong-bg); }
+  .feedback-title { display:block; margin-bottom:2px; }
+  footer {
+    width:min(920px,calc(100% - 24px));
+    margin:20px auto 0;
+    color:var(--muted);
+    font-size:.9rem;
+    text-align:center;
+  }
+  @media (max-width:640px) {
+    .score-panel { align-items:flex-start; flex-direction:column; position:static; }
+    .actions { justify-content:flex-start; }
+    .brand { padding-top:18px; }
+  }
+</style>
+</head>
+<body>
+  <div class="tricolor"><span></span><span></span><span></span></div>
+  <header class="brand">
+    <h1>The Hindu Editorial Vocab Quiz</h1>
+    <p>04.07.2026 - Manufacturing justice</p>
+  </header>
+  <main>
+    <section class="score-panel" aria-live="polite">
+      <div class="score-text">
+        Score: <strong id="score">0</strong> / <span id="answered">0</span>
+        <span>answered</span> | <span>17 questions</span>
+      </div>
+      <div class="actions">
+        <button type="button" onclick="resetQuiz()">Reset</button>
+        <button type="button" class="primary" onclick="revealAll()">Show Answers</button>
+      </div>
+    </section>
+    
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 01</span>
+        <span>1 / 17</span>
+      </div>
+      <h2>Synonym of: Implications</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Consequences</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Causes</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Conditions</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Interpretations</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Implications means possible effects or consequences of an action.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 02</span>
+        <span>2 / 17</span>
+      </div>
+      <h2>Synonym of: Hallucinations</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Delusions</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Truth</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Memories</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Assumptions</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Hallucinations are false perceptions or fabricated information.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 03</span>
+        <span>3 / 17</span>
+      </div>
+      <h2>Synonym of: Invisible</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Concealed</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Visible</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Silent</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Ordinary</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Invisible means unseen, hidden, or not easily noticed.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 04</span>
+        <span>4 / 17</span>
+      </div>
+      <h2>Synonym of: Insidious</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Deceptive</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Honest</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Formal</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Expensive</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Insidious means deceptively dangerous and harmful.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 05</span>
+        <span>5 / 17</span>
+      </div>
+      <h2>Synonym of: Catastrophic</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Devastating</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Beneficial</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Lengthy</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Unusual</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Catastrophic means causing enormous damage or disaster.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 06</span>
+        <span>6 / 17</span>
+      </div>
+      <h2>Synonym of: Insolvency</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Bankruptcy</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Solvency</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Revenue</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Merger</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Insolvency means being unable to pay debts when due.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 07</span>
+        <span>7 / 17</span>
+      </div>
+      <h2>Antonym of: Fictitious</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Fabricated</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Genuine</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Partial</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Temporary</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Fictitious means invented or not real, so its opposite is genuine.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 08</span>
+        <span>8 / 17</span>
+      </div>
+      <h2>Antonym of: Discretion</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Judgment</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Recklessness</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Permission</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Procedure</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Discretion involves careful judgment; the opposite is recklessness.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 09</span>
+        <span>9 / 17</span>
+      </div>
+      <h2>Antonym of: Accountability</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Responsibility</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Impunity</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Supervision</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Compliance</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Accountability means answerability; the opposite is impunity.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 10</span>
+        <span>10 / 17</span>
+      </div>
+      <h2>Antonym of: Disruption</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Disturbance</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Stability</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Schedule</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Movement</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Disruption is disturbance or interruption; the opposite is stability.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 11</span>
+        <span>11 / 17</span>
+      </div>
+      <h2>Antonym of: Iota</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Trace</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Abundance</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Measure</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Symbol</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Iota means a tiny amount; the opposite is abundance.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 12</span>
+        <span>12 / 17</span>
+      </div>
+      <h2>Antonym of: Credibility</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Reliability</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Dishonesty</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Popularity</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Complexity</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Credibility means trustworthiness; the opposite is dishonesty.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 13</span>
+        <span>13 / 17</span>
+      </div>
+      <h2>Phrasal Verb: Amounts to</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>To be considered equal to something</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>To differ completely from something</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>To delay a decision for later</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>To record details formally</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Amounts to means is equal to or is considered as.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 14</span>
+        <span>14 / 17</span>
+      </div>
+      <h2>Phrasal Verb: Arrive at</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>To reach a decision after thought</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>To refuse to decide on anything</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>To revise a document carefully</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>To transfer a case elsewhere</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Arrive at means to reach a decision, conclusion, or result.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 15</span>
+        <span>15 / 17</span>
+      </div>
+      <h2>Phrasal Verb: Set aside</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>To cancel a legal decision</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>To confirm an earlier order</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>To collect money for a case</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>To explain a rule in detail</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Set aside means to cancel or declare a legal decision invalid.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 16</span>
+        <span>16 / 17</span>
+      </div>
+      <h2>Idiom: Take cognisance of</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>To officially notice a matter</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>To ignore a matter completely</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>To punish a person immediately</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>To postpone public consultation</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Take cognisance of means to officially notice or deal with a matter.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 17</span>
+        <span>17 / 17</span>
+      </div>
+      <h2>Phrasal Verb: Set up</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>To establish or create something</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>To dismantle an existing body</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>To search a legal record</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>To forgive misconduct privately</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Set up means to establish, create, arrange, or organize something.</p>
+      </div>
+    </article>
+
+  </main>
+  <footer>
+    <p>12 vocabulary questions + 5 idiom/phrasal-verb questions</p>
+    <p>https://ashokautomates.github.io/the-hindu-quizzes/04-07-2026/</p>
+  </footer>
+<script>
+  let score = 0;
+  let answered = 0;
+
+  function updateScore() {
+    document.getElementById("score").textContent = score;
+    document.getElementById("answered").textContent = answered;
+  }
+
+  function markCard(card, selectedIndex, countScore) {
+    if (card.dataset.done === "1") return;
+    const answer = Number(card.dataset.answer);
+    const options = Array.from(card.querySelectorAll(".option"));
+    const feedback = card.querySelector(".feedback");
+    const feedbackTitle = card.querySelector(".feedback-title");
+    const isCorrect = selectedIndex === answer;
+
+    options.forEach((option, index) => {
+      option.disabled = true;
+      if (index === answer) option.classList.add("correct");
+      if (index === selectedIndex && index !== answer) option.classList.add("wrong");
+    });
+
+    feedback.hidden = false;
+    feedback.classList.add(isCorrect ? "ok" : "bad");
+    feedbackTitle.textContent = isCorrect ? "Correct" : "Wrong";
+    card.dataset.done = "1";
+
+    if (countScore) {
+      answered += 1;
+      if (isCorrect) score += 1;
+      updateScore();
+    }
+  }
+
+  document.querySelectorAll(".option").forEach((button) => {
+    button.addEventListener("click", () => {
+      const card = button.closest(".question-card");
+      markCard(card, Number(button.dataset.index), true);
+    });
+  });
+
+  function revealAll() {
+    document.querySelectorAll(".question-card").forEach((card) => {
+      const answer = Number(card.dataset.answer);
+      markCard(card, answer, card.dataset.done !== "1");
+    });
+  }
+
+  function resetQuiz() {
+    score = 0;
+    answered = 0;
+    document.querySelectorAll(".question-card").forEach((card) => {
+      card.dataset.done = "0";
+      card.querySelectorAll(".option").forEach((option) => {
+        option.disabled = false;
+        option.classList.remove("correct", "wrong");
+      });
+      const feedback = card.querySelector(".feedback");
+      feedback.hidden = true;
+      feedback.classList.remove("ok", "bad");
+      card.querySelector(".feedback-title").textContent = "";
+    });
+    updateScore();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+</script>
+</body>
+</html>
