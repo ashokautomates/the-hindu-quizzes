@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECP | The Hindu 07.07.2026 - Editorial Vocab Quiz</title>
+<style>
+  :root {
+    --navy:#1F3864;
+    --navy-light:#2E4D86;
+    --saffron:#FF9933;
+    --green:#138808;
+    --bg:#eef1f6;
+    --card:#ffffff;
+    --ink:#1c2433;
+    --muted:#5b6675;
+    --line:#dce2ec;
+    --correct-bg:#e7f6ea;
+    --correct-bd:#138808;
+    --wrong-bg:#fdeceb;
+    --wrong-bd:#d64541;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body {
+    font-family:"Calibri","Segoe UI",system-ui,-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.5;
+    padding-bottom:48px;
+  }
+  .brand {
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);
+    color:#fff;
+    padding:22px 18px 16px;
+    text-align:center;
+  }
+  .brand h1 {
+    font-size:clamp(1.45rem,4vw,2.2rem);
+    letter-spacing:0;
+    margin-bottom:6px;
+  }
+  .brand p {
+    color:#e8edf7;
+    font-size:1rem;
+  }
+  .tricolor { height:5px; display:flex; }
+  .tricolor span { flex:1; }
+  .tricolor span:nth-child(1) { background:var(--saffron); }
+  .tricolor span:nth-child(2) { background:#fff; }
+  .tricolor span:nth-child(3) { background:var(--green); }
+  main {
+    width:min(920px,calc(100% - 24px));
+    margin:18px auto 0;
+  }
+  .score-panel {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:14px;
+    display:flex;
+    gap:12px;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:5;
+    box-shadow:0 8px 20px rgba(31,56,100,.08);
+  }
+  .score-text {
+    color:var(--muted);
+    font-weight:700;
+  }
+  .score-text strong { color:var(--navy); font-size:1.2rem; }
+  .actions { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+  .actions button {
+    border:1px solid var(--navy);
+    background:#fff;
+    color:var(--navy);
+    border-radius:6px;
+    padding:8px 12px;
+    font-weight:700;
+    cursor:pointer;
+  }
+  .actions button.primary { background:var(--navy); color:#fff; }
+  .question-card {
+    margin-top:14px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:16px;
+    box-shadow:0 5px 16px rgba(31,56,100,.06);
+  }
+  .q-meta {
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    color:var(--muted);
+    font-size:.78rem;
+    font-weight:800;
+    margin-bottom:8px;
+  }
+  .question-card h2 {
+    font-size:1.06rem;
+    color:var(--navy);
+    margin-bottom:12px;
+  }
+  .options {
+    display:grid;
+    gap:8px;
+  }
+  .option {
+    width:100%;
+    border:1px solid var(--line);
+    background:#fff;
+    color:var(--ink);
+    border-radius:6px;
+    padding:10px 12px;
+    text-align:left;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    cursor:pointer;
+    font:inherit;
+    font-weight:700;
+  }
+  .option:disabled { cursor:default; opacity:1; }
+  .letter {
+    flex:0 0 auto;
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    background:#f1f4f9;
+    color:var(--navy);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:.82rem;
+  }
+  .option.correct {
+    background:var(--correct-bg);
+    border-color:var(--correct-bd);
+  }
+  .option.wrong {
+    background:var(--wrong-bg);
+    border-color:var(--wrong-bd);
+  }
+  .feedback {
+    margin-top:10px;
+    padding:10px 12px;
+    border-radius:6px;
+    border:1px solid var(--line);
+    background:#f7f9fc;
+  }
+  .feedback.ok { border-color:var(--correct-bd); background:var(--correct-bg); }
+  .feedback.bad { border-color:var(--wrong-bd); background:var(--wrong-bg); }
+  .feedback-title { display:block; margin-bottom:2px; }
+  footer {
+    width:min(920px,calc(100% - 24px));
+    margin:20px auto 0;
+    color:var(--muted);
+    font-size:.9rem;
+    text-align:center;
+  }
+  @media (max-width:640px) {
+    .score-panel { align-items:flex-start; flex-direction:column; position:static; }
+    .actions { justify-content:flex-start; }
+    .brand { padding-top:18px; }
+  }
+</style>
+</head>
+<body>
+  <div class="tricolor"><span></span><span></span><span></span></div>
+  <header class="brand">
+    <h1>The Hindu Editorial Vocab Quiz</h1>
+    <p>07.07.2026 - Falling behind</p>
+  </header>
+  <main>
+    <section class="score-panel" aria-live="polite">
+      <div class="score-text">
+        Score: <strong id="score">0</strong> / <span id="answered">0</span>
+        <span>answered</span> | <span>21 questions</span>
+      </div>
+      <div class="actions">
+        <button type="button" onclick="resetQuiz()">Reset</button>
+        <button type="button" class="primary" onclick="revealAll()">Show Answers</button>
+      </div>
+    </section>
+    
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 01</span>
+        <span>1 / 21</span>
+      </div>
+      <h2>Synonym of: Evolve</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Develop</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Stagnate</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Rotate</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Announce</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Evolve means to develop gradually or change over time.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 02</span>
+        <span>2 / 21</span>
+      </div>
+      <h2>Synonym of: Intense</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Severe</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Mild</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Frequent</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Visible</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Intense means very strong, extreme, or powerful.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 03</span>
+        <span>3 / 21</span>
+      </div>
+      <h2>Synonym of: Routing</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Directing</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Withholding</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Sorting</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Recording</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Routing means directing something along a particular path.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 04</span>
+        <span>4 / 21</span>
+      </div>
+      <h2>Synonym of: Overwhelmed</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Swamped</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Composed</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Prepared</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Assigned</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Overwhelmed means unable to cope because of too much pressure or work.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 05</span>
+        <span>5 / 21</span>
+      </div>
+      <h2>Synonym of: Disruptive</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Obstructive</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Orderly</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Costly</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Temporary</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Disruptive means causing interruption or disorder.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 06</span>
+        <span>6 / 21</span>
+      </div>
+      <h2>Synonym of: Erraticity</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Unpredictability</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Consistency</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Popularity</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Transparency</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Erraticity means irregularity or unpredictability.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 07</span>
+        <span>7 / 21</span>
+      </div>
+      <h2>Synonym of: Vulnerabilities</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Weaknesses</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Safeguards</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Preferences</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Estimates</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Vulnerabilities are weaknesses or areas easily harmed.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 08</span>
+        <span>8 / 21</span>
+      </div>
+      <h2>Synonym of: Compounded</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Aggravated</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Eased</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Reported</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Measured</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Compounded means made a problem worse by adding another difficulty.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 09</span>
+        <span>9 / 21</span>
+      </div>
+      <h2>Antonym of: Cascading</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Sequential</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Isolated</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Vertical</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Audible</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Cascading suggests a chain of events; isolated means separate from others.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 10</span>
+        <span>10 / 21</span>
+      </div>
+      <h2>Antonym of: Coincide</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Concur</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Differ</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Expand</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Pause</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Coincide means happen together or agree; differ is the opposite.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 11</span>
+        <span>11 / 21</span>
+      </div>
+      <h2>Antonym of: Haphazard</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Chaotic</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Systematic</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Ancient</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Official</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Haphazard means unplanned or disorderly; systematic is the opposite.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 12</span>
+        <span>12 / 21</span>
+      </div>
+      <h2>Antonym of: Undermine</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Weaken</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Strengthen</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Translate</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Inspect</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Undermine means weaken; strengthen is the opposite.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 13</span>
+        <span>13 / 21</span>
+      </div>
+      <h2>Antonym of: Desilting</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Dredging</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Clogging</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Polishing</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Mapping</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Desilting removes deposits; clogging blocks the flow.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 14</span>
+        <span>14 / 21</span>
+      </div>
+      <h2>Antonym of: Redundancy</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Backup</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Shortage</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Procedure</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Margin</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Redundancy can mean backup or surplus; shortage is an opposite.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 15</span>
+        <span>15 / 21</span>
+      </div>
+      <h2>Antonym of: Belated</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Delayed</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Prompt</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Formal</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Partial</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Belated means late or delayed; prompt means timely.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 16</span>
+        <span>16 / 21</span>
+      </div>
+      <h2>Antonym of: Hazardous</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Perilous</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Safe</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Routine</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Remote</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Hazardous means dangerous; safe is the opposite.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 17</span>
+        <span>17 / 21</span>
+      </div>
+      <h2>Idiom: Loaded with</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Filled with a large amount</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Empty or lacking contents</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Delayed until later</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Moved without direction</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Loaded with means filled with or carrying plenty of something.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 18</span>
+        <span>18 / 21</span>
+      </div>
+      <h2>Idiom: Sweeping over</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Moving quickly across a wide area</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Staying within a small spot</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Examining a place carefully</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Removing dirt from a floor</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Sweeping over means moving across a place quickly and widely.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 19</span>
+        <span>19 / 21</span>
+      </div>
+      <h2>Idiom: In short bursts</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Happening briefly with pauses</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Continuing without interruption</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Starting earlier than expected</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Speaking in a low voice</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>In short bursts means happening for brief periods with pauses.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 20</span>
+        <span>20 / 21</span>
+      </div>
+      <h2>Phrasal Verb: Shut down</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Stop operating or functioning</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Begin operating again</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Increase the price</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Explain in detail</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Shut down means to close or stop operating.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 21</span>
+        <span>21 / 21</span>
+      </div>
+      <h2>Phrasal Verb: Catch up to</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Reach the same level after being behind</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Fall further behind</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Avoid meeting someone</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Store something carefully</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Catch up to means reach the same level after being behind.</p>
+      </div>
+    </article>
+
+  </main>
+  <footer>
+    <p>16 vocabulary questions + 5 idiom/phrasal-verb questions</p>
+    <p>https://ashokautomates.github.io/the-hindu-quizzes/07-07-2026/</p>
+  </footer>
+<script>
+  let score = 0;
+  let answered = 0;
+
+  function updateScore() {
+    document.getElementById("score").textContent = score;
+    document.getElementById("answered").textContent = answered;
+  }
+
+  function markCard(card, selectedIndex, countScore) {
+    if (card.dataset.done === "1") return;
+    const answer = Number(card.dataset.answer);
+    const options = Array.from(card.querySelectorAll(".option"));
+    const feedback = card.querySelector(".feedback");
+    const feedbackTitle = card.querySelector(".feedback-title");
+    const isCorrect = selectedIndex === answer;
+
+    options.forEach((option, index) => {
+      option.disabled = true;
+      if (index === answer) option.classList.add("correct");
+      if (index === selectedIndex && index !== answer) option.classList.add("wrong");
+    });
+
+    feedback.hidden = false;
+    feedback.classList.add(isCorrect ? "ok" : "bad");
+    feedbackTitle.textContent = isCorrect ? "Correct" : "Wrong";
+    card.dataset.done = "1";
+
+    if (countScore) {
+      answered += 1;
+      if (isCorrect) score += 1;
+      updateScore();
+    }
+  }
+
+  document.querySelectorAll(".option").forEach((button) => {
+    button.addEventListener("click", () => {
+      const card = button.closest(".question-card");
+      markCard(card, Number(button.dataset.index), true);
+    });
+  });
+
+  function revealAll() {
+    document.querySelectorAll(".question-card").forEach((card) => {
+      const answer = Number(card.dataset.answer);
+      markCard(card, answer, card.dataset.done !== "1");
+    });
+  }
+
+  function resetQuiz() {
+    score = 0;
+    answered = 0;
+    document.querySelectorAll(".question-card").forEach((card) => {
+      card.dataset.done = "0";
+      card.querySelectorAll(".option").forEach((option) => {
+        option.disabled = false;
+        option.classList.remove("correct", "wrong");
+      });
+      const feedback = card.querySelector(".feedback");
+      feedback.hidden = true;
+      feedback.classList.remove("ok", "bad");
+      card.querySelector(".feedback-title").textContent = "";
+    });
+    updateScore();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+</script>
+</body>
+</html>
