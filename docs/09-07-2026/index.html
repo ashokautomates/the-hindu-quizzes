@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECP | The Hindu 09.07.2026 - Editorial Vocab Quiz</title>
+<style>
+  :root {
+    --navy:#1F3864;
+    --navy-light:#2E4D86;
+    --saffron:#FF9933;
+    --green:#138808;
+    --bg:#eef1f6;
+    --card:#ffffff;
+    --ink:#1c2433;
+    --muted:#5b6675;
+    --line:#dce2ec;
+    --correct-bg:#e7f6ea;
+    --correct-bd:#138808;
+    --wrong-bg:#fdeceb;
+    --wrong-bd:#d64541;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body {
+    font-family:"Calibri","Segoe UI",system-ui,-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.5;
+    padding-bottom:48px;
+  }
+  .brand {
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);
+    color:#fff;
+    padding:22px 18px 16px;
+    text-align:center;
+  }
+  .brand h1 {
+    font-size:clamp(1.45rem,4vw,2.2rem);
+    letter-spacing:0;
+    margin-bottom:6px;
+  }
+  .brand p {
+    color:#e8edf7;
+    font-size:1rem;
+  }
+  .tricolor { height:5px; display:flex; }
+  .tricolor span { flex:1; }
+  .tricolor span:nth-child(1) { background:var(--saffron); }
+  .tricolor span:nth-child(2) { background:#fff; }
+  .tricolor span:nth-child(3) { background:var(--green); }
+  main {
+    width:min(920px,calc(100% - 24px));
+    margin:18px auto 0;
+  }
+  .score-panel {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:14px;
+    display:flex;
+    gap:12px;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:5;
+    box-shadow:0 8px 20px rgba(31,56,100,.08);
+  }
+  .score-text {
+    color:var(--muted);
+    font-weight:700;
+  }
+  .score-text strong { color:var(--navy); font-size:1.2rem; }
+  .actions { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+  .actions button {
+    border:1px solid var(--navy);
+    background:#fff;
+    color:var(--navy);
+    border-radius:6px;
+    padding:8px 12px;
+    font-weight:700;
+    cursor:pointer;
+  }
+  .actions button.primary { background:var(--navy); color:#fff; }
+  .question-card {
+    margin-top:14px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:16px;
+    box-shadow:0 5px 16px rgba(31,56,100,.06);
+  }
+  .q-meta {
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    color:var(--muted);
+    font-size:.78rem;
+    font-weight:800;
+    margin-bottom:8px;
+  }
+  .question-card h2 {
+    font-size:1.06rem;
+    color:var(--navy);
+    margin-bottom:12px;
+  }
+  .options {
+    display:grid;
+    gap:8px;
+  }
+  .option {
+    width:100%;
+    border:1px solid var(--line);
+    background:#fff;
+    color:var(--ink);
+    border-radius:6px;
+    padding:10px 12px;
+    text-align:left;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    cursor:pointer;
+    font:inherit;
+    font-weight:700;
+  }
+  .option:disabled { cursor:default; opacity:1; }
+  .letter {
+    flex:0 0 auto;
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    background:#f1f4f9;
+    color:var(--navy);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:.82rem;
+  }
+  .option.correct {
+    background:var(--correct-bg);
+    border-color:var(--correct-bd);
+  }
+  .option.wrong {
+    background:var(--wrong-bg);
+    border-color:var(--wrong-bd);
+  }
+  .feedback {
+    margin-top:10px;
+    padding:10px 12px;
+    border-radius:6px;
+    border:1px solid var(--line);
+    background:#f7f9fc;
+  }
+  .feedback.ok { border-color:var(--correct-bd); background:var(--correct-bg); }
+  .feedback.bad { border-color:var(--wrong-bd); background:var(--wrong-bg); }
+  .feedback-title { display:block; margin-bottom:2px; }
+  footer {
+    width:min(920px,calc(100% - 24px));
+    margin:20px auto 0;
+    color:var(--muted);
+    font-size:.9rem;
+    text-align:center;
+  }
+  @media (max-width:640px) {
+    .score-panel { align-items:flex-start; flex-direction:column; position:static; }
+    .actions { justify-content:flex-start; }
+    .brand { padding-top:18px; }
+  }
+</style>
+</head>
+<body>
+  <div class="tricolor"><span></span><span></span><span></span></div>
+  <header class="brand">
+    <h1>The Hindu Editorial Vocab Quiz</h1>
+    <p>09.07.2026 - Prisoners of violence</p>
+  </header>
+  <main>
+    <section class="score-panel" aria-live="polite">
+      <div class="score-text">
+        Score: <strong id="score">0</strong> / <span id="answered">0</span>
+        <span>answered</span> | <span>19 questions</span>
+      </div>
+      <div class="actions">
+        <button type="button" onclick="resetQuiz()">Reset</button>
+        <button type="button" class="primary" onclick="revealAll()">Show Answers</button>
+      </div>
+    </section>
+    
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 01</span>
+        <span>1 / 19</span>
+      </div>
+      <h2>Synonym of: Uphold</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Support</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Violate</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Inspect</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Announce</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Uphold means to support or maintain something in force.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 02</span>
+        <span>2 / 19</span>
+      </div>
+      <h2>Synonym of: Apparently</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Seemingly</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Definitely</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Privately</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Gradually</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Apparently means seemingly or according to what appears true.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 03</span>
+        <span>3 / 19</span>
+      </div>
+      <h2>Synonym of: Apathy</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Indifference</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Concern</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Fatigue</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Silence</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Apathy means lack of interest, concern, or enthusiasm.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 04</span>
+        <span>4 / 19</span>
+      </div>
+      <h2>Synonym of: Escalate</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Intensify</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Reduce</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Measure</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Arrange</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Escalate means to increase or become more serious.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 05</span>
+        <span>5 / 19</span>
+      </div>
+      <h2>Synonym of: Grabbed</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Seized</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Released</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Noticed</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Folded</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Grabbed means seized or took something suddenly.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 06</span>
+        <span>6 / 19</span>
+      </div>
+      <h2>Synonym of: Assaulted</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Attacked</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Protected</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Questioned</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Followed</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Assaulted means attacked physically or violently.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 07</span>
+        <span>7 / 19</span>
+      </div>
+      <h2>Antonym of: Menace</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Threat</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Safety</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Burden</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Warning</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>A menace is a threat; safety is the opposite.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 08</span>
+        <span>8 / 19</span>
+      </div>
+      <h2>Antonym of: Trigger</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Cause</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Prevent</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Mention</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Record</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Trigger means cause something to begin; prevent is the opposite.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 09</span>
+        <span>9 / 19</span>
+      </div>
+      <h2>Antonym of: Deadly</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Fatal</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Harmless</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Costly</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Sudden</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Deadly means fatal or dangerous; harmless is the opposite.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 10</span>
+        <span>10 / 19</span>
+      </div>
+      <h2>Antonym of: Intent</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Purpose</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Aimlessness</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Method</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Result</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Intent as a noun means purpose; aimlessness is the opposite.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 11</span>
+        <span>11 / 19</span>
+      </div>
+      <h2>Antonym of: Persist</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Continue</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Quit</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Respond</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Recover</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Persist means continue firmly; quit is the opposite.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="1">
+      <div class="q-meta">
+        <span>QUESTION 12</span>
+        <span>12 / 19</span>
+      </div>
+      <h2>Antonym of: Grave</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Serious</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Minor</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Official</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Recent</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Grave means very serious; minor is the opposite.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 13</span>
+        <span>13 / 19</span>
+      </div>
+      <h2>Idiom: Speaks to</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Indicate or show evidence of something</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Hide the real reason deliberately</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Speak loudly to a crowd</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Ask for official permission</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Speaks to means indicates, reflects, or provides evidence of something.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 14</span>
+        <span>14 / 19</span>
+      </div>
+      <h2>Idiom: Emerge on</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Become known or come to light on a platform</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Disappear from public discussion</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Arrive physically on a stage</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Delay news until later</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Emerge on means become known or come to light on a day or platform.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 15</span>
+        <span>15 / 19</span>
+      </div>
+      <h2>Phrasal Verb: Tipping off</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Secretly give information or a warning</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Confuse someone with false details</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Reward a person for service</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Start a public argument suddenly</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Tipping off means secretly giving information or a warning.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 16</span>
+        <span>16 / 19</span>
+      </div>
+      <h2>Phrasal Verb: Wipe out</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Destroy or eliminate completely</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Protect and preserve carefully</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Reduce slightly for a short time</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Describe a problem in detail</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Wipe out means destroy completely or eliminate entirely.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 17</span>
+        <span>17 / 19</span>
+      </div>
+      <h2>Phrasal Verb: Crack down</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Take strong action against illegal activity</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Ignore an offence deliberately</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Open a container with force</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Settle a dispute through talks</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Crack down means take strong action against illegal or undesirable activity.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 18</span>
+        <span>18 / 19</span>
+      </div>
+      <h2>Phrasal Verb: Carry out</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Perform or execute a task or plan</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Cancel a duty before starting</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Carry an object outside</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Announce a plan without action</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Carry out means perform, complete, or execute a task or plan.</p>
+      </div>
+    </article>
+
+
+    <article class="question-card" data-answer="0">
+      <div class="q-meta">
+        <span>QUESTION 19</span>
+        <span>19 / 19</span>
+      </div>
+      <h2>Idiom: Pose a threat</h2>
+      <div class="options">
+        <button class="option" type="button" data-index="0"><span class="letter">A</span><span>Present a danger or risk</span></button>
+<button class="option" type="button" data-index="1"><span class="letter">B</span><span>Offer complete protection</span></button>
+<button class="option" type="button" data-index="2"><span class="letter">C</span><span>Make a formal promise</span></button>
+<button class="option" type="button" data-index="3"><span class="letter">D</span><span>Create a minor delay</span></button>
+      </div>
+      <div class="feedback" hidden>
+        <strong class="feedback-title"></strong>
+        <p>Pose a threat means present a danger or risk.</p>
+      </div>
+    </article>
+
+  </main>
+  <footer>
+    <p>12 vocabulary questions + 7 idiom/phrasal-verb questions</p>
+    <p>https://ashokautomates.github.io/the-hindu-quizzes/09-07-2026/</p>
+  </footer>
+<script>
+  let score = 0;
+  let answered = 0;
+
+  function updateScore() {
+    document.getElementById("score").textContent = score;
+    document.getElementById("answered").textContent = answered;
+  }
+
+  function markCard(card, selectedIndex, countScore) {
+    if (card.dataset.done === "1") return;
+    const answer = Number(card.dataset.answer);
+    const options = Array.from(card.querySelectorAll(".option"));
+    const feedback = card.querySelector(".feedback");
+    const feedbackTitle = card.querySelector(".feedback-title");
+    const isCorrect = selectedIndex === answer;
+
+    options.forEach((option, index) => {
+      option.disabled = true;
+      if (index === answer) option.classList.add("correct");
+      if (index === selectedIndex && index !== answer) option.classList.add("wrong");
+    });
+
+    feedback.hidden = false;
+    feedback.classList.add(isCorrect ? "ok" : "bad");
+    feedbackTitle.textContent = isCorrect ? "Correct" : "Wrong";
+    card.dataset.done = "1";
+
+    if (countScore) {
+      answered += 1;
+      if (isCorrect) score += 1;
+      updateScore();
+    }
+  }
+
+  document.querySelectorAll(".option").forEach((button) => {
+    button.addEventListener("click", () => {
+      const card = button.closest(".question-card");
+      markCard(card, Number(button.dataset.index), true);
+    });
+  });
+
+  function revealAll() {
+    document.querySelectorAll(".question-card").forEach((card) => {
+      const answer = Number(card.dataset.answer);
+      markCard(card, answer, card.dataset.done !== "1");
+    });
+  }
+
+  function resetQuiz() {
+    score = 0;
+    answered = 0;
+    document.querySelectorAll(".question-card").forEach((card) => {
+      card.dataset.done = "0";
+      card.querySelectorAll(".option").forEach((option) => {
+        option.disabled = false;
+        option.classList.remove("correct", "wrong");
+      });
+      const feedback = card.querySelector(".feedback");
+      feedback.hidden = true;
+      feedback.classList.remove("ok", "bad");
+      card.querySelector(".feedback-title").textContent = "";
+    });
+    updateScore();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+</script>
+</body>
+</html>
